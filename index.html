@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="HYROX PREP">
+<title>HYROX PREP · PABLO SAINTS</title>
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj4KICA8cmVjdCB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgcng9IjQwIiBmaWxsPSIjMDAwMDAwIi8+CiAgPHRleHQgeD0iOTAiIHk9IjU4IiAKICAgIGZvbnQtZmFtaWx5PSJBcmlhbCxIZWx2ZXRpY2Esc2Fucy1zZXJpZiIgCiAgICBmb250LXdlaWdodD0iNzAwIiAKICAgIGZvbnQtc2l6ZT0iMTgiIAogICAgZmlsbD0iI0ZGRTYwMCIgCiAgICB0ZXh0LWFuY2hvcj0ibWlkZGxlIgogICAgbGV0dGVyLXNwYWNpbmc9IjUiPkhZUk9YPC90ZXh0PgogIDxyZWN0IHg9IjI1IiB5PSI2OCIgd2lkdGg9IjEzMCIgaGVpZ2h0PSIzIiBmaWxsPSIjRkZFNjAwIi8+CiAgPHRleHQgeD0iOTAiIHk9IjEyOCIgCiAgICBmb250LWZhbWlseT0iQXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWYiIAogICAgZm9udC13ZWlnaHQ9IjcwMCIgCiAgICBmb250LXNpemU9IjQyIiAKICAgIGZpbGw9IiNGRkU2MDAiIAogICAgdGV4dC1hbmNob3I9Im1pZGRsZSIKICAgIGxldHRlci1zcGFjaW5nPSI2Ij5QUkVQPC90ZXh0Pgo8L3N2Zz4=">
+<link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkhZUk9YIFBSRVAiLAogICJzaG9ydF9uYW1lIjogIkhZUk9YIFBSRVAiLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMwMDAwMDAiLAogICJ0aGVtZV9jb2xvciI6ICIjMDAwMDAwIiwKICAib3JpZW50YXRpb24iOiAicG9ydHJhaXQiCn0=">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --black:#000000;
+  --white:#ffffff;
+  --yellow:#FFE600;
+  --gray1:#111111;
+  --gray2:#1a1a1a;
+  --gray3:#242424;
+  --gray4:#2e2e2e;
+  --gray5:#3a3a3a;
+  --muted:#666666;
+  --muted2:#444444;
+  --text:#e8e8e8;
+  --text2:#888888;
+  --green:#00e676;
+  --red:#ff1744;
+  --orange:#ff6d00;
+  --safe-top:env(safe-area-inset-top,0px);
+  --safe-bot:env(safe-area-inset-bottom,0px);
+  --font-cond:'Barlow Condensed',sans-serif;
+  --font:'Barlow',sans-serif;
+}
+html,body{height:100%;background:var(--black);color:var(--white);font-family:var(--font);font-size:15px;line-height:1.4;overflow:hidden;
+  -webkit-text-size-adjust:100%;text-size-adjust:100%;
+  touch-action:manipulation;
+  -webkit-user-select:none;user-select:none;
+}
+input,textarea{-webkit-user-select:text;user-select:text;}
+#app{display:flex;flex-direction:column;height:100%;padding-top:var(--safe-top)}
+#screen{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding-bottom:calc(64px + var(--safe-bot))overscroll-behavior:contain;}
+
+/* ── NAVBAR ── */
+#navbar{
+  position:fixed;bottom:0;left:0;right:0;
+  height:calc(58px + var(--safe-bot));
+  padding-bottom:var(--safe-bot);
+  background:var(--black);
+  border-top:1px solid var(--gray3);
+  display:flex;z-index:200;
+  overflow:hidden;
+}
+.nb{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:2px;background:none;border:none;color:var(--muted);
+  font-family:var(--font-cond);font-size:9px;font-weight:700;
+  letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;padding-top:6px;
+  transition:color 0.15s;touch-action:manipulation;
+}
+.nb svg{width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.nb.active{color:var(--yellow)}
+.nb-bar{width:16px;height:2px;background:var(--yellow);border-radius:1px;opacity:0;transition:opacity 0.15s;margin-top:0px}
+.nb.active .nb-bar{opacity:1}
+
+/* ── TYPOGRAPHY ── */
+.hero{font-family:var(--font-cond);font-weight:900;text-transform:uppercase;letter-spacing:-0.01em}
+.label{font-family:var(--font-cond);font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);font-size:11px}
+.num{font-family:var(--font-cond);font-weight:900}
+
+/* ── DIVIDERS / BORDERS ── */
+.rule{height:1px;background:var(--gray3);margin:0}
+.rule-y{height:1px;background:var(--yellow);margin:0}
+
+/* ── STATUS BADGES ── */
+.tag{display:inline-flex;align-items:center;font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border:1px solid}
+.tag-g{border-color:var(--green);color:var(--green)}
+.tag-y{border-color:var(--yellow);color:var(--yellow)}
+.tag-r{border-color:var(--red);color:var(--red)}
+.tag-gr{border-color:var(--muted2);color:var(--muted)}
+
+/* ── CARDS ── */
+.card{background:var(--gray1);border:1px solid var(--gray3)}
+.card-y{border-color:var(--yellow)}
+
+/* ── TODAY CARD – hero style ── */
+.today-card{
+  position:relative;overflow:hidden;
+  background:var(--gray1);
+  border-top:3px solid var(--yellow);
+  border-bottom:1px solid var(--gray3);
+  cursor:pointer;
+  -webkit-user-select:none;user-select:none;
+}
+.today-card:active{background:var(--gray2)}
+.today-card .type-stripe{
+  position:absolute;top:0;right:0;
+  font-family:var(--font-cond);font-weight:900;font-size:80px;
+  text-transform:uppercase;letter-spacing:-2px;
+  color:rgba(255,255,255,0.03);
+  line-height:1;padding:8px 12px;
+  pointer-events:none;
+}
+
+/* ── WEEK STRIP ── */
+#wstrip{
+  display:flex;overflow-x:auto;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+  gap:0;
+}
+#wstrip::-webkit-scrollbar{display:none}
+.wchip{
+  flex-shrink:0;
+  padding:11px 12px;
+  background:var(--black);
+  border-right:1px solid var(--gray3);
+  cursor:pointer;
+  text-align:center;
+  transition:background 0.1s;
+  min-width:56px;
+  touch-action:manipulation;
+}
+.wchip:active{background:var(--gray2)}
+.wchip.active{background:var(--yellow)}
+.wchip-n{font-family:var(--font-cond);font-size:14px;font-weight:900;color:var(--white);letter-spacing:.04em}
+.wchip.active .wchip-n{color:var(--black)}
+.wchip-p{font-size:10px;color:var(--muted);margin-top:1px;font-family:var(--font-cond);font-weight:700;letter-spacing:.06em}
+.wchip.active .wchip-p{color:rgba(0,0,0,0.5)}
+
+/* ── DAY ROW ── */
+.dr{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 18px;border-bottom:1px solid var(--gray2);
+  cursor:pointer;transition:background 0.1s;
+  min-height:52px;
+}
+.dr:active{background:var(--gray2)}
+.dr-bar{width:3px;height:36px;flex-shrink:0;border-radius:1px}
+.dr-info{flex:1;min-width:0}
+.dr-name{font-family:var(--font-cond);font-size:16px;font-weight:800;text-transform:uppercase;letter-spacing:.03em}
+.dr-sub{font-size:12px;color:var(--text2);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dr-meta{font-family:var(--font-cond);font-size:12px;font-weight:700;color:var(--yellow);letter-spacing:.06em;margin-top:3px}
+
+/* ── HISTORY ROW ── */
+.hi{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border-bottom:1px solid var(--gray2);cursor:pointer;transition:background 0.1s}
+.hi:active{background:var(--gray2)}
+.hi-icon{
+  width:42px;height:42px;flex-shrink:0;
+  background:var(--gray3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;
+}
+
+/* ── STAT BLOCKS ── */
+.stat-block{background:var(--gray1);border:1px solid var(--gray3);padding:14px 16px}
+.stat-n{font-family:var(--font-cond);font-weight:900;font-size:36px;letter-spacing:-1px;line-height:1}
+.stat-l{font-family:var(--font-cond);font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:11px;color:var(--muted);margin-top:3px}
+
+/* ── PROGRESS BAR ── */
+.pb{height:3px;background:var(--gray3)}
+.pf{height:100%;transition:width 0.6s cubic-bezier(.4,0,.2,1)}
+
+/* ── WEEK PROGRESS RING ── */
+.ring-wrap{position:relative;display:inline-flex;align-items:center;justify-content:center}
+.ring-wrap svg{transform:rotate(-90deg)}
+.ring-center{position:absolute;text-align:center}
+
+/* ── CALENDAR ROW ── */
+.cal-row{display:grid;grid-template-columns:repeat(7,1fr);border-bottom:1px solid var(--gray3)}
+.cal-cell{
+  display:flex;flex-direction:column;align-items:center;
+  padding:9px 2px;border-right:1px solid var(--gray2);
+  cursor:pointer;transition:background 0.1s;
+  touch-action:manipulation;
+}
+.cal-cell:last-child{border-right:none}
+.cal-cell:active{background:var(--gray2)}
+.cal-cell.today{background:var(--yellow)}
+.cal-dow{font-family:var(--font-cond);font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+.cal-cell.today .cal-dow{color:rgba(0,0,0,0.5)}
+.cal-dn{font-family:var(--font-cond);font-size:17px;font-weight:900;margin:2px 0}
+.cal-cell.today .cal-dn{color:var(--black)}
+.cal-dot{width:5px;height:5px;border-radius:50%;margin-top:2px}
+
+/* ── SHEET ── */
+.ov{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:300;display:flex;flex-direction:column;justify-content:flex-end;animation:fadeOv .2s ease}
+@keyframes fadeOv{from{opacity:0}to{opacity:1}}
+.sh{
+  background:var(--gray1);
+  border-top:2px solid var(--yellow);
+  max-height:93vh;
+  overflow-y:auto;-webkit-overflow-scrolling:touch;
+  animation:slideUp .28s cubic-bezier(.16,1,.3,1);
+  padding-bottom:var(--safe-bot);
+overscroll-behavior:contain;}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.sh-h{width:32px;height:3px;background:var(--gray4);margin:10px auto 0;border-radius:1px}
+.sh-top{display:flex;align-items:flex-start;justify-content:space-between;padding:12px 18px 8px}
+.sh-x{background:var(--gray3);border:1px solid var(--gray4);color:var(--muted);width:28px;height:28px;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--font)}
+.sh-body{padding:0 18px 20px}
+
+/* ── FORM ── */
+.fl{margin-bottom:14px}
+.fl label{display:block;font-family:var(--font-cond);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:6px}
+.fl input,.fl textarea{
+  width:100%;background:var(--black);
+  border:1px solid var(--gray4);
+  color:var(--white);font-family:var(--font);font-size:16px;
+  padding:13px 13px;outline:none;
+  transition:border-color 0.15s;
+  border-radius:0;-webkit-appearance:none;appearance:none;
+}
+.fl input:focus,.fl textarea:focus{border-color:var(--yellow)}
+.fl textarea{resize:none;height:72px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+/* ── RPE ── */
+.rpe-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:4px}
+.rpe-b{
+  height:36px;background:var(--black);border:1px solid var(--gray4);
+  color:var(--muted);font-family:var(--font-cond);font-size:13px;font-weight:800;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:all 0.12s;letter-spacing:.02em;
+}
+.rpe-b:active{background:var(--gray3)}
+.rpe-b.sel{border-color:var(--yellow);background:var(--yellow);color:var(--black)}
+
+/* ── STATUS ── */
+.sq{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.sq-b{
+  padding:11px 4px;background:var(--black);border:1px solid var(--gray4);
+  text-align:center;font-family:var(--font-cond);font-size:13px;font-weight:800;
+  letter-spacing:.06em;text-transform:uppercase;cursor:pointer;color:var(--muted);
+  transition:all 0.12s;
+}
+.sq-b:active{background:var(--gray3)}
+.sq-b.s-done{border-color:var(--green);color:var(--green);background:rgba(0,230,118,0.06)}
+.sq-b.s-partial{border-color:var(--yellow);color:var(--yellow);background:rgba(255,230,0,0.06)}
+.sq-b.s-skip{border-color:var(--red);color:var(--red);background:rgba(255,23,68,0.06)}
+
+/* ── BUTTON ── */
+.btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:14px;font-family:var(--font-cond);font-size:16px;font-weight:900;
+  letter-spacing:.12em;text-transform:uppercase;border:none;cursor:pointer;
+  transition:opacity .15s,transform .1s;width:100%;
+}
+.btn:active{transform:scale(0.97);opacity:.85}
+.btn-p{background:var(--yellow);color:var(--black)}
+.btn-d{background:transparent;color:var(--red);border:1px solid var(--red)}
+
+/* ── LIVE METRIC ── */
+.lm{display:inline-flex;align-items:center;gap:6px;background:var(--black);border:1px solid var(--gray4);padding:6px 12px;font-family:var(--font-cond);font-size:13px;font-weight:700;letter-spacing:.06em}
+.lm strong{color:var(--yellow);font-size:15px}
+
+/* ── EDIT MODE ── */
+.edit-row{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--gray2)}
+.edit-row input{flex:1;background:var(--black);border:1px solid var(--gray4);color:var(--white);font-family:var(--font);font-size:13px;padding:7px 10px;outline:none;border-radius:0}
+.edit-row input:focus{border-color:var(--yellow)}
+.del-btn{background:none;border:none;color:var(--red);font-size:22px;padding:2px 8px;cursor:pointer;flex-shrink:0;font-family:var(--font)}
+.add-btn{display:flex;align-items:center;gap:8px;padding:14px 18px;color:var(--yellow);font-family:var(--font-cond);font-size:14px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;border:none;background:none;width:100%}
+
+/* ── TOAST ── */
+#toast{
+  position:fixed;top:calc(var(--safe-top) + 48px);left:50%;
+  transform:translateX(-50%) translateY(-10px);
+  background:var(--yellow);color:var(--black);
+  font-family:var(--font-cond);font-size:13px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;
+  padding:9px 20px;z-index:500;opacity:0;transition:all .22s ease;pointer-events:none;white-space:nowrap;
+}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ── PAGE TRANSITIONS ── */
+.fade-in{animation:fadeIn .25s ease both}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── SECTION HEADER ── */
+.sh-section{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 18px 8px;
+}
+.sh-section-title{font-family:var(--font-cond);font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 375px) {
+  .hero-num{font-size:60px}
+  .wchip{min-width:48px;padding:10px 8px}
+  .wchip-n{font-size:12px}
+  .nb{font-size:8px}
+  .dr{padding:12px 14px}
+  .rpe-grid{gap:3px}
+  .rpe-b{font-size:11px}
+  .sh-body{padding:0 14px 20px}
+  .fl label{font-size:10px}
+}
+@media (max-width: 320px) {
+  .wchip{min-width:42px;padding:8px 6px}
+  .nb svg{width:16px;height:16px}
+}
+</style>
+
+<script>
+(function(){
+  try {
+    var c=document.createElement('canvas');
+    c.width=c.height=180;
+    var ctx=c.getContext('2d');
+    // Black rounded background
+    ctx.fillStyle='#000';
+    ctx.beginPath();
+    ctx.roundRect(0,0,180,180,38);
+    ctx.fill();
+    // Yellow HP text - Barlow Condensed style (use Arial Black as fallback)
+    ctx.fillStyle='#FFE600';
+    ctx.font='900 88px "Barlow Condensed","Arial Black",Arial';
+    ctx.fontStretch='condensed';
+    ctx.textAlign='center';
+    ctx.textBaseline='middle';
+    ctx.fillText('HP',90,82);
+    // Bottom bar
+    ctx.fillRect(14,150,152,12);
+    // Set as apple touch icon
+    var link=document.querySelector('link[rel="apple-touch-icon"]');
+    if(!link){link=document.createElement('link');link.rel='apple-touch-icon';document.head.appendChild(link);}
+    link.href=c.toDataURL('image/png');
+  } catch(e){}
+})();
+</script>
+</head>
+<body>
+<div id="app">
+  <div id="screen"></div>
+  <nav id="navbar">
+    <button class="nb active" id="nb-home" onclick="nav('home')">
+      <svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H5a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+      HOY<div class="nb-bar"></div>
+    </button>
+    <button class="nb" id="nb-plan" onclick="nav('plan')">
+      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="1"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      PLAN<div class="nb-bar"></div>
+    </button>
+    <button class="nb" id="nb-log" onclick="nav('log')">
+      <svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      LOG<div class="nb-bar"></div>
+    </button>
+    <button class="nb" id="nb-stats" onclick="nav('stats')">
+      <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+      STATS<div class="nb-bar"></div>
+    </button>
+    <button class="nb" id="nb-goal" onclick="nav('goal')">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>
+      OBJETIVO<div class="nb-bar"></div>
+    </button>
+  </nav>
+</div>
+<div id="toast"></div>
+
+<script>
+// ───────────────── PLAN DATA ─────────────────
+const START='2026-06-08', RACE='2026-11-13';
+const GOALS={
+  targetTime:{min:65,max:75},   // minutes total race
+  targetPace:{min:500,max:580}, // seconds per km (5:00 - 5:40)
+  stretchPace:500,              // sub 5:00/km stretch goal
+  halfMarathonPB:110,           // 1:50 in minutes
+};
+const PHASES=[
+  {id:1,name:'BASE AERÓBICA', short:'BASE', color:'#888888',weeks:6},
+  {id:2,name:'CONSTRUCCIÓN',  short:'BUILD',color:'#FFE600',weeks:8},
+  {id:3,name:'ESPECÍFICA',    short:'SPEC', color:'#ff6d00',weeks:6},
+  {id:4,name:'TAPER',         short:'TAPER',color:'#ff1744',weeks:3},
+];
+const TMPLS={
+  1:[
+    {wd:'LUN',type:'run', label:'Z2 RUN',           desc:'30–35 min Z2 continuo. Conversacional. Sin mirar el pace.'},
+    {wd:'MAR',type:'str', label:'CROSSFIT',          desc:'Sesión normal. KB swings, lunges con carga, burpees.'},
+    {wd:'MIÉ',type:'run', label:'Z2 + STRIDES',      desc:'35 min Z2 + 4×200m al final. Terminar con ganas.'},
+    {wd:'JUE',type:'rest',label:'DESCANSO ACTIVO',   desc:'Movilidad, foam roller, caminata 20 min.'},
+    {wd:'VIE',type:'str', label:'CROSSFIT + ERGOS',  desc:'Fuerza + 3×4 min ski erg o remo Z2.'},
+    {wd:'SÁB',type:'run', label:'LONG RUN',          desc:'45–55 min Z2. La sesión más importante de la semana.'},
+    {wd:'DOM',type:'rest',label:'DESCANSO',          desc:'Recuperación completa.'},
+  ],
+  2:[
+    {wd:'LUN',type:'run',  label:'Z2 RUN',            desc:'40–50 min Z2. Construyendo base.'},
+    {wd:'MAR',type:'str',  label:'CROSSFIT HYROX',    desc:'Sled, KB, wall balls, sandbag lunges fatigado.'},
+    {wd:'MIÉ',type:'run',  label:'TEMPO RUN',         desc:'15 min calor + 3×8 min Z4 + 3 min recup.'},
+    {wd:'JUE',type:'hyrox',label:'BLOQUE HYROX',      desc:'1km + Ski Erg 500m + 1km + Remo 500m + 1km.'},
+    {wd:'VIE',type:'str',  label:'FUERZA ESPECÍFICA', desc:'Sandbag lunges + burpee broad jump + carries.'},
+    {wd:'SÁB',type:'run',  label:'LONG RUN',          desc:'60–70 min Z2.'},
+    {wd:'DOM',type:'rest', label:'DESCANSO',          desc:'Recuperación.'},
+  ],
+  3:[
+    {wd:'LUN',type:'hyrox',label:'BLOQUE HYROX A',    desc:'1km+Ski+Remo+1km+Sled Push/Pull+1km.'},
+    {wd:'MAR',type:'str',  label:'FUERZA HYROX',      desc:'Sled, farmers, wall balls, burpees fatigado.'},
+    {wd:'MIÉ',type:'run',  label:'TEMPO RUN',         desc:'15 min calor + 4×8 min Z4.'},
+    {wd:'JUE',type:'rest', label:'DESCANSO ACTIVO',   desc:'Movilidad. Preparar simulacro del viernes.'},
+    {wd:'VIE',type:'hyrox',label:'SIMULACRO DOBLES',  desc:'Recorrido 6–8 estaciones con compañero.'},
+    {wd:'SÁB',type:'run',  label:'LONG RUN',          desc:'60–70 min Z2.'},
+    {wd:'DOM',type:'rest', label:'DESCANSO',          desc:'Recuperación.'},
+  ],
+  4:[
+    {wd:'LUN',type:'run',  label:'Z2 SUAVE',          desc:'25–30 min Z2 muy tranquilo.'},
+    {wd:'MAR',type:'str',  label:'FUERZA LIGERA',     desc:'CrossFit moderado.'},
+    {wd:'MIÉ',type:'run',  label:'ACTIVACIÓN',        desc:'20 min + 4×100m ligero.'},
+    {wd:'JUE',type:'rest', label:'DESCANSO ACTIVO',   desc:'Solo movilidad.'},
+    {wd:'VIE',type:'hyrox',label:'MINI SIMULACRO',    desc:'3–4 estaciones a ritmo carrera. 30 min.'},
+    {wd:'SÁB',type:'rest', label:'DESCANSO',          desc:'Descanso activo.'},
+    {wd:'DOM',type:'rest', label:'DESCANSO',          desc:'Recuperación total.'},
+  ],
+};
+
+const RACE_WEEK=[
+  {wd:'LUN',type:'run',  label:'Z2 SUAVE',            desc:'20 min Z2 muy ligero. Últimos ajustes.'},
+  {wd:'MAR',type:'rest', label:'DESCANSO ACTIVO',      desc:'Movilidad suave. Sin carga.'},
+  {wd:'MIÉ',type:'run',  label:'ACTIVACIÓN',           desc:'15 min + 4×100m. Piernas despiertas.'},
+  {wd:'JUE',type:'rest', label:'DESCANSO TOTAL',       desc:'Descanso completo. Preparar equipaje de carrera.'},
+  {wd:'VIE',type:'hyrox',label:'🏁 HYROX BARCELONA',  desc:'¡ES EL DÍA! HYROX Barcelona · Modalidad Dobles · 13 Nov 2026.'},
+  {wd:'SÁB',type:'rest', label:'DESCANSO',             desc:'Recuperación post-carrera. ¡Celebrar!'},
+  {wd:'DOM',type:'rest', label:'DESCANSO',             desc:'Recuperación post-carrera.'},
+];
+
+function addDays(base,n){const d=new Date(base+'T12:00:00');d.setDate(d.getDate()+n);return d.toISOString().split('T')[0]}
+function buildPlan(){
+  const weeks=[];let wn=1;
+  PHASES.forEach(ph=>{
+    const tmpl=TMPLS[ph.id];
+    const totalWeeks=PHASES.reduce((a,p)=>a+p.weeks,0);
+    for(let wi=0;wi<ph.weeks;wi++){
+      const ws=addDays(START,(wn-1)*7);
+      const isRaceWeek=(wn===totalWeeks);
+      const src=isRaceWeek?RACE_WEEK:tmpl;
+      const days=src.map((d,di)=>({id:`w${wn}d${di}`,wn,ph:ph.id,wd:d.wd,date:addDays(ws,di),type:d.type,label:d.label,desc:d.desc}));
+      const wLabel=isRaceWeek?'RACE WEEK':`S${wn}`;
+      weeks.push({id:wn,ph:ph.id,phName:ph.name,phColor:ph.color||'#888',start:ws,end:addDays(ws,6),days,label:wLabel,isRaceWeek});
+      wn++;
+    }
+  });
+  return weeks;
+}
+
+// ───────────────── STORAGE ─────────────────
+function getEdits(){try{return JSON.parse(localStorage.getItem('hx_edits')||'{}')}catch(e){return{}}}
+function saveEdits(e){localStorage.setItem('hx_edits',JSON.stringify(e))}
+function getLogs(){try{return JSON.parse(localStorage.getItem('hx_logs')||'{}')}catch(e){return{}}}
+function getLog(id){return getLogs()[id]||null}
+function setLog(id,d){const l=getLogs();l[id]=d;localStorage.setItem('hx_logs',JSON.stringify(l))}
+function delLog(id){const l=getLogs();delete l[id];localStorage.setItem('hx_logs',JSON.stringify(l))}
+
+// ── PACE TRACKING ──
+function getPaceTests(){try{return JSON.parse(localStorage.getItem('hx_pace_tests')||'[]')}catch(e){return[]}}
+function addPaceTest(t){const p=getPaceTests();p.push(t);localStorage.setItem('hx_pace_tests',JSON.stringify(p))}
+function delPaceTest(i){const p=getPaceTests();p.splice(i,1);localStorage.setItem('hx_pace_tests',JSON.stringify(p))}
+
+function getPlan(){
+  const weeks=buildPlan(),edits=getEdits();
+  weeks.forEach(w=>{
+    w.days.forEach(d=>{if(edits[d.id])Object.assign(d,edits[d.id])});
+    if(edits['add_'+w.id])edits['add_'+w.id].forEach(ad=>{if(!w.days.find(x=>x.id===ad.id))w.days.push(ad)});
+    if(edits['del_'+w.id])w.days=w.days.filter(d=>!edits['del_'+w.id].includes(d.id));
+  });
+  return weeks;
+}
+function editDay(id,ch){const e=getEdits();e[id]=Object.assign(e[id]||{},ch);saveEdits(e)}
+function delDay(wId,id){const e=getEdits();const k='del_'+wId;if(!e[k])e[k]=[];if(!e[k].includes(id))e[k].push(id);saveEdits(e)}
+function addDay(wId,d){const e=getEdits();const k='add_'+wId;if(!e[k])e[k]=[];e[k].push(d);saveEdits(e)}
+
+// ───────────────── STATE ─────────────────
+let screen='home',planWeek=null,editMode=false,_tmpStatus=null,_tmpRpe=null;
+function today(){return new Date().toISOString().split('T')[0]}
+function nav(s){
+  screen=s;editMode=false;
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  document.getElementById('nb-'+s)?.classList.add('active');
+  render();
+}
+
+// ───────────────── HELPERS ─────────────────
+const TC={run:'#ff6d00',str:'#5090f0',hyrox:'#FFE600',rest:'#444'};
+const TL={run:'RUNNING',str:'FUERZA',hyrox:'HYROX',rest:'DESCANSO'};
+const TI={run:'🏃',str:'💪',hyrox:'🔥',rest:'😴'};
+
+function fmtD(s){if(!s)return'';return new Date(s+'T12:00:00').toLocaleDateString('es-ES',{day:'numeric',month:'short'}).toUpperCase()}
+function daysTo(t){return Math.max(0,Math.ceil((new Date(t)-new Date())/86400000))}
+function getCW(w){const t=today();return w.find(x=>x.start<=t&&t<=x.end)||w[0]}
+function getTD(w){const t=today();for(const wk of w)for(const d of wk.days)if(d.date===t)return d;return null}
+function wProg(w){
+  const l=getLogs();let done=0,total=0;
+  w.days.forEach(d=>{if(d.type==='rest')return;total++;const lg=l[d.id];if(lg&&(lg.status==='done'||lg.status==='partial'))done++;});
+  return{done,total,pct:total?Math.round(done/total*100):0};
+}
+function dCol(s){return{done:'var(--green)',partial:'var(--yellow)',skip:'var(--red)'}[s]||'var(--gray4)'}
+function sBadge(s){
+  if(!s)return`<span class="tag tag-gr">—</span>`;
+  if(s==='done')return`<span class="tag tag-g">DONE</span>`;
+  if(s==='partial')return`<span class="tag tag-y">PARCIAL</span>`;
+  return`<span class="tag tag-r">SKIP</span>`;
+}
+function secToMMSS(sec){const m=Math.floor(sec/60),s=Math.round(sec%60);return`${m}:${s<10?'0'+s:s}`}
+function mmssToSec(str){if(!str)return null;const p=str.split(':');if(p.length!==2)return null;return parseInt(p[0])*60+parseInt(p[1])}
+function paceFromKmMin(km,min){
+  if(!km||!min||km<=0)return null;
+  const p=parseFloat(min)/parseFloat(km);
+  const m=Math.floor(p),s=Math.round((p-m)*60);
+  return`${m}:${s<10?'0'+s:s}/km`;
+}
+function paceSecFromKmMin(km,min){
+  if(!km||!min||km<=0)return null;
+  return (parseFloat(min)/parseFloat(km))*60;
+}
+function pace(km,min){
+  if(!km||!min||km<=0)return null;
+  const p=parseFloat(min)/parseFloat(km),m=Math.floor(p),s=Math.round((p-m)*60);
+  return`${m}:${s<10?'0'+s:s}/km`;
+}
+function zone(hr){
+  if(!hr)return null;const h=parseInt(hr);
+  if(h<120)return{z:1,label:'Z1',full:'MUY FÁCIL',color:'#4CAF50'};
+  if(h<140)return{z:2,label:'Z2',full:'FÁCIL',color:'#2196F3'};
+  if(h<155)return{z:3,label:'Z3',full:'MODERADO',color:'#FFE600'};
+  if(h<170)return{z:4,label:'Z4',full:'DURO',color:'#FF6D00'};
+  return{z:5,label:'Z5',full:'MÁXIMO',color:'#FF1744'};
+}
+function rpeCol(r){if(!r)return'var(--muted)';if(r<=3)return'var(--green)';if(r<=6)return'var(--yellow)';if(r<=8)return'var(--orange)';return'var(--red)'}
+
+function ring(size,stroke,pct,color,inner){
+  const r=(size-stroke)/2,c=2*Math.PI*r,dash=c*pct/100;
+  return`<div class="ring-wrap" style="width:${size}px;height:${size}px">
+    <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
+      <circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${color}22" stroke-width="${stroke}"/>
+      <circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${color}" stroke-width="${stroke}" stroke-dasharray="${dash} ${c}" stroke-linecap="square"/>
+    </svg>
+    <div class="ring-center">${inner}</div>
+  </div>`;
+}
+
+// ───────────────── RENDER ─────────────────
+function render(){
+  const weeks=getPlan();
+  const s=document.getElementById('screen');
+  s.className='fade-in';
+  if(screen==='home')s.innerHTML=renderHome(weeks);
+  else if(screen==='plan')s.innerHTML=renderPlan(weeks);
+  else if(screen==='log')s.innerHTML=renderHistory(weeks);
+  else if(screen==='stats')s.innerHTML=renderStats(weeks);
+  else if(screen==='goal')s.innerHTML=renderGoal(weeks);
+  void s.offsetWidth;
+  if(screen==='plan'){
+    const strip=document.getElementById('wstrip');
+    const active=strip?.querySelector('.wchip.active');
+    if(active)setTimeout(()=>active.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'}),60);
+  }
+}
+
+// ───────────────── HOME ─────────────────
+function renderHome(weeks){
+  const cw=getCW(weeks),td=getTD(weeks),log=td?getLog(td.id):null;
+  const wp=cw?wProg(cw):{done:0,total:0,pct:0};
+  const ph=PHASES.find(p=>p.id===cw?.ph);
+  const dtr=daysTo(RACE);
+  const rCol=dtr>60?'var(--green)':dtr>30?'var(--yellow)':'var(--orange)';
+
+  // Calendar row
+  let calHtml='<div class="cal-row">';
+  if(cw){
+    cw.days.forEach(d=>{
+      const l=getLogs()[d.id];
+      const dc=l?dCol(l.status):'transparent';
+      const isToday=d.date===today();
+      const dayNum=new Date(d.date+'T12:00:00').getDate();
+      calHtml+=`<div class="cal-cell${isToday?' today':''}" onclick="openLog('${d.id}')">
+        <div class="cal-dow">${d.wd.substring(0,2)}</div>
+        <div class="cal-dn">${dayNum}</div>
+        <div class="cal-dot" style="background:${d.type==='rest'?'transparent':dc};${d.type!=='rest'&&!l?'border:1px solid var(--gray4)':''}"></div>
+      </div>`;
+    });
+  }
+  calHtml+='</div>';
+
+  // Today card
+  let todayHtml='';
+  const isRaceDay=td?.label?.includes('HYROX BARCELONA');
+  if(td&&td.type!=='rest'){
+    const tc=isRaceDay?'var(--yellow)':TC[td.type];
+    const p=pace(log?.km,log?.minutes),z=zone(log?.hr);
+    todayHtml=`<div class="today-card" onclick="openLog('${td.id}')" style="${isRaceDay?'border-top:3px solid var(--yellow);background:#0a0a00':''}" >
+      <div class="type-stripe">${isRaceDay?'RACE DAY':TL[td.type]}</div>
+      <div style="padding:18px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+          <span style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:${tc}">${isRaceDay?'🏁 RACE DAY · BARCELONA':TI[td.type]+' '+TL[td.type]+' · HOY'}</span>
+          ${sBadge(log?.status)}
+        </div>
+        <div style="font-family:var(--font-cond);font-size:28px;font-weight:900;text-transform:uppercase;letter-spacing:.01em;line-height:1;margin-bottom:6px">${td.label}</div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.5">${td.desc}</div>
+        ${log?.km||log?.rpe?`
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;padding-top:12px;border-top:1px solid var(--gray3)">
+          ${log.km?`<div class="lm">📍 <strong>${log.km} km</strong></div>`:''}
+          ${log.minutes?`<div class="lm">⏱ <strong>${log.minutes}'</strong></div>`:''}
+          ${p?`<div class="lm">⚡ <strong style="color:${tc}">${p}</strong></div>`:''}
+          ${z?`<div class="lm">♥ <strong style="color:${z.color}">${z.label}</strong></div>`:''}
+          ${log.rpe?`<div class="lm">RPE <strong style="color:${rpeCol(log.rpe)}">${log.rpe}</strong></div>`:''}
+        </div>`:`<div style="margin-top:12px;font-family:var(--font-cond);font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--yellow);text-transform:uppercase">→ TOCA PARA REGISTRAR</div>`}
+      </div>
+    </div>`;
+  } else if(td?.type==='rest'){
+    todayHtml=`<div style="background:var(--gray1);border-top:3px solid var(--gray4);border-bottom:1px solid var(--gray3);padding:20px 18px;text-align:center">
+      <div style="font-size:28px;margin-bottom:8px">😴</div>
+      <div style="font-family:var(--font-cond);font-size:20px;font-weight:900;text-transform:uppercase;letter-spacing:.04em">DÍA DE DESCANSO</div>
+      <div style="font-size:13px;color:var(--text2);margin-top:4px">El cuerpo se adapta descansando.</div>
+    </div>`;
+  }
+
+  // Upcoming
+  const all=weeks.flatMap(w=>w.days);
+  const up=all.filter(d=>d.date>today()&&d.type!=='rest').slice(0,3);
+  let upHtml='';
+  if(up.length){
+    upHtml=`<div class="sh-section"><div class="sh-section-title">PRÓXIMAS SESIONES</div></div>`;
+    up.forEach(d=>{
+      const tc=TC[d.type];
+      upHtml+=`<div class="dr" onclick="openLog('${d.id}')">
+        <div class="dr-bar" style="background:${tc}"></div>
+        <div class="dr-info">
+          <div class="dr-name">${d.label}</div>
+          <div class="dr-sub" style="color:${tc}">${d.wd} · ${fmtD(d.date)}</div>
+        </div>
+        <svg width="14" height="14" viewBox="0 0 24 24" stroke="var(--muted)" stroke-width="2.5" fill="none"><path d="M9 18l6-6-6-6"/></svg>
+      </div>`;
+    });
+  }
+
+  return`
+  <!-- TOP BAR -->
+  <div style="display:flex;align-items:stretch;border-bottom:1px solid var(--gray3)">
+    <div style="flex:1;padding:18px 18px 14px">
+      <div style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:3px">${new Date().toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long'}).toUpperCase()}</div>
+      <div style="font-family:var(--font-cond);font-size:20px;font-weight:900;text-transform:uppercase;letter-spacing:.01em">${cw?.isRaceWeek?'🏁 RACE WEEK':'HYROX PREP · PABLO SAINTS'}</div>
+    </div>
+    <div style="border-left:1px solid var(--gray3);padding:12px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center">
+      <div style="font-family:var(--font-cond);font-size:30px;font-weight:900;color:${rCol};letter-spacing:-1px">${dtr}</div>
+      <div style="font-family:var(--font-cond);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">DÍAS</div>
+    </div>
+  </div>
+
+  <!-- WEEK PROGRESS -->
+  <div style="border-bottom:1px solid var(--gray3)">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 18px 8px">
+      <div>
+        <div style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:${ph?.color||'var(--muted)'}">${ph?.short} · ${cw?.label}</div>
+        <div style="font-family:var(--font-cond);font-size:14px;font-weight:700;letter-spacing:.03em;margin-top:2px">${fmtD(cw?.start)} – ${fmtD(cw?.end)}</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-family:var(--font-cond);font-size:28px;font-weight:900;color:${ph?.color||'var(--yellow)'};letter-spacing:-1px">${wp.pct}%</div>
+        <div style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--muted)">${wp.done}/${wp.total} SESIONES</div>
+      </div>
+    </div>
+    <div class="pb"><div class="pf" style="width:${wp.pct}%;background:${ph?.color||'var(--yellow)'}"></div></div>
+  </div>
+
+  <!-- CALENDAR -->
+  ${calHtml}
+
+  <!-- TODAY -->
+  ${todayHtml}
+
+  <!-- UPCOMING -->
+  ${upHtml}
+  <div style="height:20px"></div>`;
+}
+
+// ───────────────── PLAN ─────────────────
+function renderPlan(weeks){
+  const cw=getCW(weeks);
+  if(!planWeek)planWeek=cw?.id||1;
+  const sw=weeks.find(w=>w.id===planWeek)||weeks[0];
+  const ph=PHASES.find(p=>p.id===sw.ph);
+  const prog=wProg(sw);
+  const logs=getLogs();
+
+  // Week strip
+  let strip=`<div id="wstrip" style="border-bottom:1px solid var(--gray3)">`;
+  weeks.forEach(w=>{
+    const p=wProg(w),phC=PHASES.find(x=>x.id===w.ph)?.color||'#888';
+    const isA=w.id===planWeek;
+    strip+=`<div class="wchip${isA?' active':''}${w.isRaceWeek?' style="border-top:2px solid var(--yellow)"':''}" onclick="selWeek(${w.id})">
+      <div class="wchip-n">${w.isRaceWeek?'🏁':('S'+w.id)}</div>
+      <div class="wchip-p">${w.isRaceWeek?'13 NOV':p.pct?p.pct+'%':'·'}</div>
+    </div>`;
+  });
+  strip+='</div>';
+
+  // Days
+  let days='';
+  sw.days.forEach(d=>{
+    const l=logs[d.id],tc=TC[d.type]||'#888',isToday=d.date===today();
+    const lp=pace(l?.km,l?.minutes),lz=zone(l?.hr);
+    if(editMode){
+      days+=`<div class="edit-row">
+        <button class="del-btn" onclick="delPlanDay(${sw.id},'${d.id}')">−</button>
+        <div style="flex:1;min-width:0">
+          <input value="${d.label}" onchange="editDay('${d.id}',{label:this.value})" placeholder="Nombre sesión" style="margin-bottom:5px">
+          <input value="${d.type}" onchange="editDay('${d.id}',{type:this.value})" placeholder="run/str/hyrox/rest">
+        </div>
+        <div style="font-family:var(--font-cond);font-size:11px;color:var(--muted);flex-shrink:0;margin-left:6px">${d.wd}</div>
+      </div>`;
+    } else {
+      days+=`<div class="dr${isToday?' style="background:rgba(255,230,0,0.03)"':''}" onclick="openLog('${d.id}')">
+        <div class="dr-bar" style="background:${d.type==='rest'?'var(--gray3)':tc}${l?';opacity:1':';opacity:0.3'}"></div>
+        <div class="dr-info">
+          <div class="dr-name" style="${isToday?'color:var(--yellow)':''}">${d.wd} ${fmtD(d.date)}${isToday?` <span style="font-size:10px;background:var(--yellow);color:var(--black);padding:1px 5px;margin-left:4px">HEUTE</span>`:''}</div>
+          <div class="dr-sub"><span style="color:${tc}">${d.label}</span> · ${d.desc.substring(0,40)}…</div>
+          ${lp||lz||l?.rpe?`<div class="dr-meta">${lp?lp+' · ':''}${lz?lz.label+' · ':''}${l?.rpe?'RPE '+l.rpe:''}</div>`:''}
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          ${sBadge(l?.status)}
+          <svg width="12" height="12" viewBox="0 0 24 24" stroke="var(--muted)" stroke-width="2.5" fill="none"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+      </div>`;
+    }
+  });
+  if(editMode)days+=`<button class="add-btn" onclick="addPlanDay(${sw.id})">+ AÑADIR SESIÓN</button>`;
+
+  return`
+  <!-- HEADER -->
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 18px 12px;border-bottom:1px solid var(--gray3)">
+    <div>
+      <div style="font-family:var(--font-cond);font-size:26px;font-weight:900;text-transform:uppercase;letter-spacing:.01em">${sw.isRaceWeek?'🏁 RACE WEEK':sw.label+' · '+ph?.short}</div>
+      <div style="font-family:var(--font-cond);font-size:12px;font-weight:700;letter-spacing:.1em;color:${sw.isRaceWeek?'var(--yellow)':ph?.color||'var(--muted)'};margin-top:2px">${sw.isRaceWeek?'HYROX BARCELONA · 13 NOV 2026':ph?.name+' · '+fmtD(sw.start)+' – '+fmtD(sw.end)}</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px">
+      <div style="text-align:center">
+        <div style="font-family:var(--font-cond);font-size:22px;font-weight:900;color:${ph?.color||'var(--yellow)'};letter-spacing:-0.5px">${prog.pct}%</div>
+      </div>
+      <button onclick="toggleEdit()" style="background:${editMode?'var(--yellow)':'var(--gray2)'};border:1px solid ${editMode?'var(--yellow)':'var(--gray4)'};color:${editMode?'var(--black)':'var(--text2)'};font-family:var(--font-cond);font-size:12px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;padding:7px 12px;cursor:pointer">
+        ${editMode?'LISTO':'EDITAR'}
+      </button>
+    </div>
+  </div>
+  ${strip}
+  ${days}
+  <div style="height:20px"></div>`;
+}
+
+// ───────────────── HISTORY ─────────────────
+function renderHistory(weeks){
+  const logs=getLogs();
+  const all=weeks.flatMap(w=>w.days.map(d=>({...d,log:logs[d.id]}))).filter(d=>d.log).sort((a,b)=>b.date.localeCompare(a.date));
+
+  if(!all.length)return`
+    <div style="padding:20px 18px;border-bottom:1px solid var(--gray3)">
+      <div style="font-family:var(--font-cond);font-size:26px;font-weight:900;text-transform:uppercase">LOG</div>
+    </div>
+    <div style="text-align:center;padding:60px 24px;color:var(--muted)">
+      <div style="font-size:36px;margin-bottom:12px">📋</div>
+      <div style="font-family:var(--font-cond);font-size:18px;font-weight:900;text-transform:uppercase;margin-bottom:6px">SIN REGISTROS</div>
+      <div style="font-size:13px">Registra tu primer entreno desde HOY</div>
+    </div>`;
+
+  let prev='',html=`
+  <div style="display:flex;align-items:baseline;gap:12px;padding:16px 18px 12px;border-bottom:1px solid var(--gray3)">
+    <div style="font-family:var(--font-cond);font-size:26px;font-weight:900;text-transform:uppercase">LOG</div>
+    <div style="font-family:var(--font-cond);font-size:14px;font-weight:700;color:var(--muted);text-transform:uppercase">${all.length} SESIONES</div>
+  </div>`;
+
+  all.forEach(d=>{
+    const wl=`SEMANA ${d.wn}`;
+    if(wl!==prev){
+      html+=`<div style="padding:12px 18px 6px;font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--gray2)">${wl} · ${fmtD(weeks.find(w=>w.id===d.wn)?.start||'')}</div>`;
+      prev=wl;
+    }
+    const l=d.log,tc=TC[d.type]||'#888';
+    const p=pace(l.km,l.minutes),z=zone(l.hr);
+    html+=`<div class="hi" onclick="openLog('${d.id}')">
+      <div class="hi-icon" style="border-left:2px solid ${tc}">${TI[d.type]||'📋'}</div>
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+          <span style="font-family:var(--font-cond);font-size:15px;font-weight:900;text-transform:uppercase;letter-spacing:.02em">${d.label}</span>
+          ${sBadge(l.status)}
+        </div>
+        <div style="font-family:var(--font-cond);font-size:12px;font-weight:700;letter-spacing:.08em;color:${tc};margin-bottom:5px">${d.wd} ${fmtD(d.date)}</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          ${l.km?`<span class="lm">📍 <strong>${l.km} km</strong></span>`:''}
+          ${l.minutes?`<span class="lm">⏱ <strong>${l.minutes}'</strong></span>`:''}
+          ${p?`<span class="lm">⚡ <strong style="color:${tc}">${p}</strong></span>`:''}
+          ${z?`<span class="lm">♥ <strong style="color:${z.color}">${z.label}</strong></span>`:''}
+          ${l.rpe?`<span class="lm">RPE <strong style="color:${rpeCol(l.rpe)}">${l.rpe}</strong></span>`:''}
+        </div>
+        ${l.notes?`<div style="font-size:12px;color:var(--muted);margin-top:6px;font-style:italic">"${l.notes.substring(0,72)}${l.notes.length>72?'…':''}"</div>`:''}
+      </div>
+    </div>`;
+  });
+  return html+`<div style="height:20px"></div>`;
+}
+
+// ───────────────── STATS ─────────────────
+function renderStats(weeks){
+  const logs=getLogs();
+  let tDone=0,tPartial=0,tSkip=0,tSess=0,tKm=0,tMin=0,runKm=0,runMin=0;
+  const rpeCount={},weekKm={};
+  weeks.forEach(w=>w.days.forEach(d=>{
+    if(d.type==='rest')return;tSess++;
+    const l=logs[d.id];if(!l)return;
+    if(l.status==='done')tDone++;else if(l.status==='partial')tPartial++;else if(l.status==='skip')tSkip++;
+    if(l.km){tKm+=parseFloat(l.km)||0;if(d.type==='run')runKm+=parseFloat(l.km)||0;}
+    if(l.minutes){tMin+=parseFloat(l.minutes)||0;if(d.type==='run')runMin+=parseFloat(l.minutes)||0;}
+    if(l.rpe)rpeCount[l.rpe]=(rpeCount[l.rpe]||0)+1;
+    if(!weekKm[w.id])weekKm[w.id]=0;
+    if(l.km)weekKm[w.id]+=parseFloat(l.km)||0;
+  }));
+  const adh=tSess?Math.round((tDone+tPartial+tSkip)/tSess*100):0;
+  const ap=runKm>0&&runMin>0?pace(runKm,runMin):null;
+
+  const maxRpe=Math.max(1,...Object.values(rpeCount));
+  let rpeHtml='<div style="display:flex;align-items:flex-end;gap:3px;height:60px">';
+  for(let i=1;i<=10;i++){
+    const cnt=rpeCount[i]||0,h=cnt?Math.max(3,Math.round(cnt/maxRpe*60)):3;
+    const col=i<=3?'var(--green)':i<=6?'var(--yellow)':i<=8?'var(--orange)':'var(--red)';
+    rpeHtml+=`<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px">
+      <div style="width:100%;background:${col};height:${h}px;opacity:${cnt?0.9:0.1}"></div>
+      <span style="font-family:var(--font-cond);font-size:9px;font-weight:700;color:var(--muted)">${i}</span>
+    </div>`;
+  }
+  rpeHtml+='</div>';
+
+  const wks=weeks.slice(0,22),maxKm=Math.max(1,...wks.map(w=>weekKm[w.id]||0));
+  let kmHtml='<div style="display:flex;align-items:flex-end;gap:2px;height:60px">';
+  wks.forEach(w=>{
+    const km=weekKm[w.id]||0,h=km?Math.max(2,Math.round(km/maxKm*60)):2;
+    const isCw=getCW(weeks)?.id===w.id;
+    const col=isCw?'var(--yellow)':PHASES.find(p=>p.id===w.ph)?.color||'var(--orange)';
+    kmHtml+=`<div style="flex:1;background:${col};height:${h}px;opacity:${km?0.8:0.1};${isCw?'outline:1px solid var(--yellow)':''}"></div>`;
+  });
+  kmHtml+='</div><div style="display:flex;justify-content:space-between;margin-top:4px"><span style="font-family:var(--font-cond);font-size:9px;font-weight:700;color:var(--muted)">S1</span><span style="font-family:var(--font-cond);font-size:9px;font-weight:700;color:var(--muted)">S22</span></div>';
+
+  let phRings='<div style="display:flex;gap:0">';
+  PHASES.forEach(ph=>{
+    let d=0,t=0;
+    weeks.filter(w=>w.ph===ph.id).forEach(w=>w.days.forEach(day=>{
+      if(day.type==='rest')return;t++;
+      const l=logs[day.id];if(l&&(l.status==='done'||l.status==='partial'))d++;
+    }));
+    const pct=t?Math.round(d/t*100):0;
+    phRings+=`<div style="flex:1;padding:14px 12px;border-right:1px solid var(--gray3);text-align:center">
+      ${ring(54,4,pct,ph.color,`<div style="font-family:var(--font-cond);font-size:12px;font-weight:900;color:${ph.color}">${pct}%</div>`)}
+      <div style="font-family:var(--font-cond);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:6px">${ph.short}</div>
+    </div>`;
+  });
+  phRings+='</div>';
+
+  return`
+  <div style="border-bottom:1px solid var(--gray3);padding:16px 18px 12px">
+    <div style="font-family:var(--font-cond);font-size:26px;font-weight:900;text-transform:uppercase">STATS</div>
+  </div>
+
+  <!-- ADHERENCIA HERO -->
+  <div style="border-bottom:1px solid var(--gray3);padding:18px">
+    <div style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">ADHERENCIA</div>
+    <div style="display:flex;align-items:center;gap:16px">
+      ${ring(80,5,adh,'var(--yellow)',`<div style="font-family:var(--font-cond);font-size:18px;font-weight:900;color:var(--yellow)">${adh}%</div>`)}
+      <div style="flex:1">
+        <div class="pb" style="margin-bottom:10px"><div class="pf" style="width:${adh}%;background:var(--yellow)"></div></div>
+        <div style="display:flex;gap:14px">
+          <div><div style="font-family:var(--font-cond);font-size:22px;font-weight:900;color:var(--green)">${tDone}</div><div style="font-family:var(--font-cond);font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--muted)">HECHAS</div></div>
+          <div><div style="font-family:var(--font-cond);font-size:22px;font-weight:900;color:var(--yellow)">${tPartial}</div><div style="font-family:var(--font-cond);font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--muted)">PARCIAL</div></div>
+          <div><div style="font-family:var(--font-cond);font-size:22px;font-weight:900;color:var(--red)">${tSkip}</div><div style="font-family:var(--font-cond);font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--muted)">SKIP</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KEY NUMBERS -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--gray3)">
+    <div style="padding:14px 18px;border-right:1px solid var(--gray3)">
+      <div style="font-family:var(--font-cond);font-size:34px;font-weight:900;color:var(--orange);letter-spacing:-1px">${Math.round(tKm*10)/10}</div>
+      <div style="font-family:var(--font-cond);font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-top:2px">KM TOTALES</div>
+    </div>
+    <div style="padding:14px 18px">
+      <div style="font-family:var(--font-cond);font-size:34px;font-weight:900;letter-spacing:-1px">${Math.round(tMin)}'</div>
+      <div style="font-family:var(--font-cond);font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-top:2px">MINUTOS</div>
+    </div>
+    ${ap?`
+    <div style="padding:14px 18px;border-top:1px solid var(--gray3);border-right:1px solid var(--gray3)">
+      <div style="font-family:var(--font-cond);font-size:26px;font-weight:900;color:var(--yellow);letter-spacing:-0.5px">${ap}</div>
+      <div style="font-family:var(--font-cond);font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-top:2px">PACE MEDIO</div>
+    </div>`:''}
+    <div style="padding:14px 18px;border-top:1px solid var(--gray3)">
+      <div style="font-family:var(--font-cond);font-size:34px;font-weight:900;letter-spacing:-1px;${daysTo(RACE)<30?'color:var(--red)':daysTo(RACE)<60?'color:var(--yellow)':''}">${daysTo(RACE)}</div>
+      <div style="font-family:var(--font-cond);font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-top:2px">DÍAS RESTANTES</div>
+    </div>
+  </div>
+
+  <!-- KM CHART -->
+  <div style="padding:14px 18px;border-bottom:1px solid var(--gray3)">
+    <div style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px">KM POR SEMANA</div>
+    ${kmHtml}
+  </div>
+
+  <!-- RPE -->
+  <div style="padding:14px 18px;border-bottom:1px solid var(--gray3)">
+    <div style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px">RPE · ESFUERZO</div>
+    ${Object.keys(rpeCount).length?rpeHtml:`<div style="font-family:var(--font-cond);font-size:13px;color:var(--muted);padding:8px 0">SIN DATOS AÚN</div>`}
+  </div>
+
+  <!-- PHASES -->
+  <div>
+    <div style="padding:12px 18px 8px;font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--gray3)">PROGRESO POR FASE</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--gray3)">
+    </div>
+    ${phRings}
+  </div>
+  <div style="height:20px"></div>`;
+}
+
+// ───────────────── LOG SHEET ─────────────────
+function openLog(dayId){
+  const weeks=getPlan();
+  let day=null;
+  for(const w of weeks)for(const d of w.days)if(d.id===dayId){day=d;break;}
+  if(!day)return;
+  const log=getLog(dayId)||{},tc=TC[day.type]||'#888',isRest=day.type==='rest';
+  const p=pace(log.km,log.minutes),z=zone(log.hr);
+
+  let rpeH='<div class="rpe-grid">';
+  for(let i=1;i<=10;i++){
+    const col=i<=3?'var(--green)':i<=6?'var(--yellow)':i<=8?'var(--orange)':'var(--red)';
+    const sel=log.rpe==i;
+    rpeH+=`<div class="rpe-b${sel?' sel':''}" style="${sel?'background:var(--yellow);color:var(--black);border-color:var(--yellow)':''}" onclick="tapRpe(${i})">${i}</div>`;
+  }
+  rpeH+='</div>';
+
+  let sqH='<div class="sq">';
+  [{k:'done',l:'✓ HECHO'},{k:'partial',l:'~ PARCIAL'},{k:'skip',l:'✗ SKIP'}].forEach(({k,l})=>{
+    sqH+=`<div class="sq-b${log.status===k?' s-'+k:''}" onclick="tapStatus('${k}')">${l}</div>`;
+  });
+  sqH+='</div>';
+
+  let fields='';
+  if(!isRest){
+    if(day.type==='run'||day.type==='hyrox'){
+      fields+=`<div class="g2">
+        <div class="fl"><label>Distancia km</label><input type="number" inputmode="decimal" step="0.1" placeholder="0.0" id="f_km" value="${log.km||''}" oninput="livePace()"></div>
+        <div class="fl"><label>Tiempo min</label><input type="number" inputmode="numeric" placeholder="0" id="f_min" value="${log.minutes||''}" oninput="livePace()"></div>
+      </div>
+      <div class="g2">
+        <div class="fl"><label>FC media bpm</label><input type="number" inputmode="numeric" placeholder="—" id="f_hr" value="${log.hr||''}" oninput="liveZone()"></div>
+        <div class="fl"><label>FC máxima bpm</label><input type="number" inputmode="numeric" placeholder="—" id="f_hrmax" value="${log.hrmax||''}"></div>
+      </div>
+      <div id="live-m" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px">
+        ${p?`<div class="lm">⚡ <strong style="color:${tc}">${p}</strong></div>`:''}
+        ${z?`<div class="lm">♥ <strong style="color:${z.color}">${z.full}</strong></div>`:''}
+      </div>`;
+    } else {
+      fields+=`<div class="g2">
+        <div class="fl"><label>Tiempo min</label><input type="number" inputmode="numeric" placeholder="0" id="f_min" value="${log.minutes||''}"></div>
+        <div class="fl"><label>FC media bpm</label><input type="number" inputmode="numeric" placeholder="—" id="f_hr" value="${log.hr||''}"></div>
+      </div>
+      <div class="fl"><label>Carga / Sets</label><input type="text" placeholder="ej. 3×5 deadlift 120kg" id="f_load" value="${log.load||''}"></div>`;
+    }
+    fields+=`<div class="fl"><label>RPE · Esfuerzo 1–10</label>${rpeH}</div>`;
+    fields+=`<div class="fl"><label>Estado</label>${sqH}</div>`;
+    fields+=`<div class="fl"><label>Notas</label><textarea id="f_notes" placeholder="Sensaciones, qué notar para la próxima...">${log.notes||''}</textarea></div>`;
+  }
+
+  const ov=document.createElement('div');
+  ov.className='ov';ov.id='log-sheet';
+  ov.innerHTML=`<div class="sh">
+    <div class="sh-h"></div>
+    <div class="sh-top">
+      <div style="flex:1">
+        <div style="font-family:var(--font-cond);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:${tc};margin-bottom:4px">${TI[day.type]} ${TL[day.type]} · ${day.wd} ${fmtD(day.date)}</div>
+        <div style="font-family:var(--font-cond);font-size:22px;font-weight:900;text-transform:uppercase;letter-spacing:.01em;line-height:1">${day.label}</div>
+      </div>
+      <button class="sh-x" onclick="closeSheet()">✕</button>
+    </div>
+    <div class="sh-body">
+      <div style="font-size:13px;color:var(--text2);padding:10px 12px;background:var(--black);border-left:2px solid ${tc};margin-bottom:16px;line-height:1.5">${day.desc}</div>
+      ${fields}
+      ${!isRest?`
+      <button class="btn btn-p" onclick="saveLog('${dayId}')" style="margin-top:4px">GUARDAR ENTRENO</button>
+      ${Object.keys(log).length?`<button class="btn btn-d" onclick="confirmDel('${dayId}')" style="margin-top:8px">BORRAR REGISTRO</button>`:''}`
+      :`<div style="text-align:center;padding:20px;font-family:var(--font-cond);font-size:16px;font-weight:700;text-transform:uppercase;color:var(--muted)">DESCANSO 😴</div>`}
+    </div>
+  </div>`;
+  ov.addEventListener('click',e=>{if(e.target===ov)closeSheet();});
+  document.body.appendChild(ov);
+}
+
+function livePace(){
+  const km=document.getElementById('f_km')?.value,min=document.getElementById('f_min')?.value;
+  const p=pace(km,min),z=zone(document.getElementById('f_hr')?.value);
+  const el=document.getElementById('live-m');if(!el)return;
+  let h='';
+  if(p)h+=`<div class="lm">⚡ <strong style="color:var(--orange)">${p}</strong></div>`;
+  if(z)h+=`<div class="lm">♥ <strong style="color:${z.color}">${z.full}</strong></div>`;
+  el.innerHTML=h;
+}
+function liveZone(){
+  const z=zone(document.getElementById('f_hr')?.value);
+  const km=document.getElementById('f_km')?.value,min=document.getElementById('f_min')?.value;
+  const p=pace(km,min),el=document.getElementById('live-m');if(!el)return;
+  let h='';
+  if(p)h+=`<div class="lm">⚡ <strong style="color:var(--orange)">${p}</strong></div>`;
+  if(z)h+=`<div class="lm">♥ <strong style="color:${z.color}">${z.full}</strong></div>`;
+  el.innerHTML=h;
+}
+function tapStatus(s){
+  _tmpStatus=s;
+  document.querySelectorAll('.sq-b').forEach(el=>el.className='sq-b');
+  event.currentTarget.classList.add('s-'+s);
+}
+function tapRpe(r){
+  _tmpRpe=r;
+  document.querySelectorAll('.rpe-b').forEach(b=>{b.classList.remove('sel');b.style.cssText='';});
+  const btn=event.currentTarget;
+  btn.classList.add('sel');
+  btn.style.background='var(--yellow)';btn.style.color='var(--black)';btn.style.borderColor='var(--yellow)';
+}
+function saveLog(dayId){
+  const ex=getLog(dayId)||{};
+  const status=_tmpStatus||ex.status||null;
+  const rpe=_tmpRpe||ex.rpe||null;
+  const km=document.getElementById('f_km')?.value||ex.km||null;
+  const minutes=document.getElementById('f_min')?.value||ex.minutes||null;
+  const hr=document.getElementById('f_hr')?.value||ex.hr||null;
+  const hrmax=document.getElementById('f_hrmax')?.value||ex.hrmax||null;
+  const notes=document.getElementById('f_notes')?.value||ex.notes||null;
+  const load=document.getElementById('f_load')?.value||ex.load||null;
+  if(!status&&!rpe&&!km&&!minutes&&!hr&&!notes&&!load){toast('AÑADE AL MENOS UN DATO');return;}
+  setLog(dayId,{status:status||'done',rpe:rpe?parseInt(rpe):null,km:km?parseFloat(km):null,minutes:minutes?parseFloat(minutes):null,hr:hr?parseInt(hr):null,hrmax:hrmax?parseInt(hrmax):null,notes:notes||null,load:load||null,_at:Date.now()});
+  _tmpStatus=null;_tmpRpe=null;
+  toast('✓ GUARDADO');closeSheet();
+}
+function confirmDel(dayId){
+  if(!confirm('¿Borrar este registro?'))return;
+  delLog(dayId);toast('BORRADO');closeSheet();
+}
+function closeSheet(){
+  document.getElementById('log-sheet')?.remove();
+  _tmpStatus=null;_tmpRpe=null;render();
+}
+function toggleEdit(){editMode=!editMode;render();}
+function selWeek(id){planWeek=id;render();}
+function delPlanDay(wId,id){delDay(wId,id);render();}
+function addPlanDay(wId){
+  const id=`extra_${wId}_${Date.now()}`;
+  addDay(wId,{id,wn:wId,ph:1,wd:'EXTRA',date:'',type:'run',label:'SESIÓN EXTRA',desc:'Descripción personalizada'});
+  render();toast('SESIÓN AÑADIDA');
+}
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2000);
+}
+
+// ───────────────── GOAL SCREEN ─────────────────
+function renderGoal(weeks){
+  const logs=getLogs();
+  const paceTests=getPaceTests();
+  
+  // Collect all run paces from logs
+  const runPaces=[];
+  weeks.forEach(w=>w.days.forEach(d=>{
+    if(d.type!=='run'&&d.type!=='hyrox')return;
+    const l=logs[d.id];
+    if(!l||!l.km||!l.minutes)return;
+    const sec=paceSecFromKmMin(l.km,l.minutes);
+    if(sec&&sec>200&&sec<900){
+      runPaces.push({date:d.date,label:d.label,sec,km:l.km,type:d.type,wn:d.wn});
+    }
+  }));
+  // Add manual pace tests
+  paceTests.forEach(t=>{
+    const sec=mmssToSec(t.pace);
+    if(sec)runPaces.push({date:t.date,label:t.label||'TEST',sec,km:t.km,type:'run',wn:0,isTest:true,testIdx:t.idx});
+  });
+  runPaces.sort((a,b)=>a.date.localeCompare(b.date));
+
+  const bestPace=runPaces.length?Math.min(...runPaces.map(r=>r.sec)):null;
+  const lastPace=runPaces.length?runPaces[runPaces.length-1].sec:null;
+  const targetMin=GOALS.targetPace.min; // 5:00 = 300 sec
+  const targetMax=GOALS.targetPace.max; // 5:40 = 340 sec
+  
+  // Progress toward goal pace (5:00-5:40/km range, target = 5:20 = 320s)
+  const targetSec=320; // 5:20/km as main target
+  const startSec=380;  // ~6:20/km estimated current level
+  const paceProgress=lastPace?Math.min(100,Math.max(0,Math.round((startSec-lastPace)/(startSec-targetSec)*100))):0;
+
+  // Chart: pace evolution
+  let chartHtml='';
+  if(runPaces.length>=2){
+    const maxSec=Math.max(...runPaces.map(r=>r.sec),420);
+    const minSec=Math.min(...runPaces.map(r=>r.sec),260);
+    const range=maxSec-minSec+30;
+    const W=runPaces.length;
+    const pts=runPaces.map((r,i)=>{
+      const x=Math.round(i/(W-1)*280+10);
+      const y=Math.round((r.sec-minSec+15)/range*70);
+      return{x,y:80-y,sec:r.sec,label:r.label,date:r.date};
+    });
+    // Target line
+    const tyStretch=Math.round((300-minSec+15)/range*70);
+    const tyMain=Math.round((targetSec-minSec+15)/range*70);
+    
+    chartHtml=`<svg width="100%" viewBox="0 0 300 90" style="overflow:visible">
+      <!-- target zones -->
+      <rect x="0" y="${80-tyStretch}" width="300" height="${tyStretch-Math.round((targetMax-minSec+15)/range*70)}" fill="rgba(255,230,0,0.04)"/>
+      <!-- stretch target line 5:00 -->
+      <line x1="0" y1="${80-tyStretch}" x2="300" y2="${80-tyStretch}" stroke="var(--yellow)" stroke-width="0.8" stroke-dasharray="4,3" opacity="0.5"/>
+      <text x="302" y="${80-tyStretch+4}" font-family="Barlow Condensed" font-size="7" font-weight="700" fill="var(--yellow)" opacity="0.7">5:00</text>
+      <!-- main target 5:20 -->
+      <line x1="0" y1="${80-tyMain}" x2="300" y2="${80-tyMain}" stroke="var(--muted)" stroke-width="0.8" stroke-dasharray="3,3" opacity="0.4"/>
+      <text x="302" y="${80-tyMain+4}" font-family="Barlow Condensed" font-size="7" font-weight="700" fill="var(--muted)" opacity="0.6">5:20</text>
+      <!-- pace line -->
+      <polyline points="${pts.map(p=>p.x+','+p.y).join(' ')}" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+      <!-- dots -->
+      ${pts.map((p,i)=>`<circle cx="${p.x}" cy="${p.y}" r="3" fill="${p.sec<=300?'var(--yellow)':p.sec<=320?'var(--green)':'var(--orange)'}"/>
+      `).join('')}
+    </svg>
+    <div style="display:flex;justify-content:space-between;margin-top:2px">
+      <span style="font-family:var(--font-cond);font-size:9px;font-weight:700;color:var(--muted)">${fmtD(runPaces[0].date)}</span>
+      <span style="font-family:var(--font-cond);font-size:9px;font-weight:700;color:var(--muted)">${fmtD(runPaces[runPaces.length-1].date)}</span>
+    </div>`;
+  } else {
+    chartHtml=`<div style="text-align:center;padding:20px 0;font-family:var(--font-cond);font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase">REGISTRA ENTRENOS CON KM + TIEMPO<br><span style="font-size:11px;opacity:.6">El gráfico aparecerá aquí</span></div>`;
+  }
+
+  // Pace tests list
+  let testsHtml='';
+  const allSorted=[...runPaces].reverse().slice(0,8);
+  allSorted.forEach((r,i)=>{
+    const col=r.sec<=300?'var(--yellow)':r.sec<=320?'var(--green)':r.sec<=340?'var(--orange)':'var(--text2)';
+    testsHtml+=`<div style="display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--gray2)">
+      <div style="font-family:var(--font-cond);font-size:22px;font-weight:900;color:${col};min-width:64px">${secToMMSS(r.sec)}</div>
+      <div style="flex:1;min-width:0">
+        <div style="font-family:var(--font-cond);font-size:13px;font-weight:800;text-transform:uppercase">${r.label}${r.isTest?' <span style="font-size:10px;color:var(--yellow);border:1px solid var(--yellow);padding:1px 4px">TEST</span>':''}</div>
+        <div style="font-family:var(--font-cond);font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase">${fmtD(r.date)} · ${r.km} km</div>
+      </div>
+      <div style="font-family:var(--font-cond);font-size:11px;font-weight:700;color:${col}">/km</div>
+    </div>`;
+  });
+
+  // Race time estimates based on best pace
+  const racePaceSec=bestPace||(lastPace)||360;
+  const fatigueFactor=1.12; // Hyrox pace ~12% slower than training
+  const hyroxPaceSec=Math.round(racePaceSec*fatigueFactor);
+  const runTimeSec=hyroxPaceSec*8;
+  const stationsTimeSec=26*60; // ~26 min for stations (strength profile)
+  const totalTimeSec=runTimeSec+stationsTimeSec;
+  const fmtTime=(s)=>{const h=Math.floor(s/3600),m=Math.floor((s%3600)/60);return h>0?`${h}h${m<10?'0'+m:m}min`:`${m}min`};
+
+  return`
+  <div style="border-bottom:1px solid var(--gray3);padding:16px 18px 12px">
+    <div style="font-family:var(--font-cond);font-size:26px;font-weight:900;text-transform:uppercase">OBJETIVO</div>
+    <div style="font-family:var(--font-cond);font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--muted);margin-top:2px">HYROX BARCELONA · 13 NOV 2026</div>
+  </div>
+
+  <!-- TARGET TIME HERO -->
+  <div style="border-bottom:1px solid var(--gray3)">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--gray3)">
+      <div style="padding:14px 16px;border-right:1px solid var(--gray3)">
+        <div style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:4px">OBJETIVO</div>
+        <div style="font-family:var(--font-cond);font-size:26px;font-weight:900;color:var(--yellow);letter-spacing:-0.5px">1:05–1:15</div>
+        <div style="font-family:var(--font-cond);font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase">TIEMPO TOTAL</div>
+      </div>
+      <div style="padding:14px 16px;border-right:1px solid var(--gray3)">
+        <div style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:4px">PACE OBJETIVO</div>
+        <div style="font-family:var(--font-cond);font-size:26px;font-weight:900;color:var(--orange);letter-spacing:-0.5px">5:20</div>
+        <div style="font-family:var(--font-cond);font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase">/KM EN HYROX</div>
+      </div>
+      <div style="padding:14px 16px">
+        <div style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:4px">STRETCH</div>
+        <div style="font-family:var(--font-cond);font-size:26px;font-weight:900;color:var(--green);letter-spacing:-0.5px">SUB 5:00</div>
+        <div style="font-family:var(--font-cond);font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase">/KM · ELITE</div>
+      </div>
+    </div>
+
+    <!-- PACE PROGRESS BAR -->
+    <div style="padding:14px 18px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+        <span style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--muted)">PROGRESO PACE</span>
+        <span style="font-family:var(--font-cond);font-size:11px;font-weight:700;color:var(--yellow)">${paceProgress}%</span>
+      </div>
+      <div class="pb" style="height:6px;position:relative">
+        <div class="pf" style="width:${paceProgress}%;background:var(--yellow);height:100%"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-top:5px">
+        <span style="font-family:var(--font-cond);font-size:10px;font-weight:700;color:var(--muted)">~6:20 HOY</span>
+        <span style="font-family:var(--font-cond);font-size:10px;font-weight:700;color:var(--yellow)">5:20 META</span>
+        <span style="font-family:var(--font-cond);font-size:10px;font-weight:700;color:var(--green)">5:00 STRETCH</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ESTIMACIÓN EN BASE A TU MEJOR PACE -->
+  ${bestPace?`<div style="padding:14px 18px;border-bottom:1px solid var(--gray3)">
+    <div style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:10px">ESTIMACIÓN BASADA EN TU ENTRENO</div>
+    <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:3px">
+      <div style="font-family:var(--font-cond);font-size:32px;font-weight:900;color:var(--yellow);letter-spacing:-1px">${fmtTime(totalTimeSec)}</div>
+      <div style="font-family:var(--font-cond);font-size:12px;font-weight:700;color:var(--muted)">ESTIMADO</div>
+    </div>
+    <div style="font-size:12px;color:var(--muted);font-family:var(--font-cond);font-weight:700">
+      MEJOR PACE: ${secToMMSS(bestPace)}/km → HYROX: ${secToMMSS(hyroxPaceSec)}/km (×1.12 fatiga) · ESTACIONES ~26min
+    </div>
+  </div>`:''}
+
+  <!-- PACE CHART -->
+  <div style="padding:14px 18px;border-bottom:1px solid var(--gray3)">
+    <div style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:10px">EVOLUCIÓN DE PACE</div>
+    <div style="padding-right:32px">${chartHtml}</div>
+    <div style="display:flex;gap:12px;margin-top:10px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:5px"><div style="width:12px;height:2px;background:var(--yellow);opacity:.5"></div><span style="font-family:var(--font-cond);font-size:10px;font-weight:700;color:var(--muted)">5:00 STRETCH</span></div>
+      <div style="display:flex;align-items:center;gap:5px"><div style="width:12px;height:2px;background:var(--muted);opacity:.4"></div><span style="font-family:var(--font-cond);font-size:10px;font-weight:700;color:var(--muted)">5:20 OBJETIVO</span></div>
+    </div>
+  </div>
+
+  <!-- PACE HISTORY -->
+  <div style="padding:0 18px">
+    <div style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;padding:12px 0 6px">ÚLTIMOS PACES REGISTRADOS</div>
+    ${testsHtml||`<div style="font-family:var(--font-cond);font-size:13px;color:var(--muted);font-weight:700;padding:12px 0 8px">REGISTRA ENTRENOS CON KM + TIEMPO</div>`}
+  </div>
+
+  <!-- ADD MANUAL TEST -->
+  <div style="padding:14px 18px;border-top:1px solid var(--gray3)">
+    <div style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:10px">AÑADIR TEST DE PACE MANUAL</div>
+    <div class="g2" style="margin-bottom:8px">
+      <div class="fl"><label>Pace (mm:ss)</label><input type="text" id="pt_pace" placeholder="5:20" pattern="[0-9]{1,2}:[0-9]{2}"></div>
+      <div class="fl"><label>Distancia km</label><input type="number" inputmode="decimal" id="pt_km" placeholder="5.0" step="0.1"></div>
+    </div>
+    <div class="g2" style="margin-bottom:12px">
+      <div class="fl"><label>Descripción</label><input type="text" id="pt_label" placeholder="Test 5km parque"></div>
+      <div class="fl"><label>Fecha</label><input type="date" id="pt_date" value="${today()}"></div>
+    </div>
+    <button class="btn btn-p" onclick="savePaceTest()" style="margin-bottom:4px">+ AÑADIR TEST</button>
+  </div>
+
+  <!-- REFERENCE: PREVIOUS HALF -->
+  <div style="padding:14px 18px;background:var(--gray1);border-top:1px solid var(--gray3)">
+    <div style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:10px">REFERENCIA HISTÓRICA</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div style="background:var(--black);border:1px solid var(--gray4);padding:12px">
+        <div style="font-family:var(--font-cond);font-size:22px;font-weight:900;color:var(--text2)">1:50</div>
+        <div style="font-family:var(--font-cond);font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-top:2px">MEDIA MARATÓN 2025</div>
+        <div style="font-family:var(--font-cond);font-size:12px;font-weight:700;color:var(--muted);margin-top:4px">5:13/km · 21km</div>
+      </div>
+      <div style="background:var(--black);border:1px solid var(--gray4);padding:12px">
+        <div style="font-family:var(--font-cond);font-size:22px;font-weight:900;color:var(--yellow)">5:20</div>
+        <div style="font-family:var(--font-cond);font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-top:2px">META HYROX 2026</div>
+        <div style="font-family:var(--font-cond);font-size:12px;font-weight:700;color:var(--muted);margin-top:4px">/km · 8km fatigado</div>
+      </div>
+    </div>
+  </div>
+  <div style="height:20px"></div>`;
+}
+
+function savePaceTest(){
+  const pace=document.getElementById('pt_pace')?.value?.trim();
+  const km=document.getElementById('pt_km')?.value;
+  const label=document.getElementById('pt_label')?.value?.trim()||'TEST PACE';
+  const date=document.getElementById('pt_date')?.value||today();
+  if(!pace||!pace.includes(':')){ toast('FORMATO PACE: mm:ss'); return; }
+  const sec=mmssToSec(pace);
+  if(!sec||sec<200||sec>900){ toast('PACE INVÁLIDO'); return; }
+  addPaceTest({pace,km:parseFloat(km)||0,label,date,idx:Date.now()});
+  toast('✓ TEST AÑADIDO');
+  render();
+}
+
+planWeek=null;
+render();
+</script>
+</body>
+</html>
